@@ -1,0 +1,30 @@
+{
+  "name": "k8w-localstorage",
+  "version": "1.0.1",
+  "description": "同时兼容浏览器和微信小程序的LocalStorage",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && npx tsc -d && cp package.json LICENSE README.md dist/",
+    "copyDts": "find src -name *.d.ts | xargs cp --target-directory dist/src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k8w/k8w-localstorage.git"
+  },
+  "keywords": [
+    "k8w",
+    "weapp",
+    "localstorage"
+  ],
+  "author": "k8w",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/k8w/k8w-localstorage/issues"
+  },
+  "homepage": "https://github.com/k8w/k8w-localstorage#readme",
+  "typings": "index.d.ts",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^3.0.0-rc"
+  }
+}
