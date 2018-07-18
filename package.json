@@ -1,6 +1,6 @@
 {
-  "name": "k8w-localstorage",
-  "version": "1.0.1",
+  "name": "k8w-local-storage",
+  "version": "1.0.0",
   "description": "同时兼容浏览器和微信小程序的LocalStorage",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/k8w/k8w-localstorage.git"
+    "url": "git+https://github.com/k8w/k8w-local-storage.git"
   },
   "keywords": [
     "k8w",
@@ -19,9 +19,9 @@
   "author": "k8w",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/k8w/k8w-localstorage/issues"
+    "url": "https://github.com/k8w/k8w-local-storage/issues"
   },
-  "homepage": "https://github.com/k8w/k8w-localstorage#readme",
+  "homepage": "https://github.com/k8w/k8w-local-storage#readme",
   "typings": "index.d.ts",
   "dependencies": {},
   "devDependencies": {
