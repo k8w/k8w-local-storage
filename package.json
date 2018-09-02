@@ -1,6 +1,6 @@
 {
   "name": "k8w-local-storage",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "同时兼容浏览器和微信小程序的LocalStorage",
   "main": "index.js",
   "scripts": {

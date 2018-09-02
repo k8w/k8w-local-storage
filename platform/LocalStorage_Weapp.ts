@@ -6,10 +6,22 @@ import ILocalStorage from "../ILocalStorage";
 const LocalStorage_Weapp: ILocalStorage = {
     // 同步
     setItem(key: string, value: any): void {
-        return wx.setStorageSync(key, value)
+        return wx.setStorageSync(key, JSON.stringify(value))
     },
     getItem<T=any>(key: string): T | null {
-        return wx.getStorageSync(key)
+        let raw = wx.getStorageSync(key);
+        try {
+            if (raw == null) {
+                return null;
+            }
+            else {
+                return JSON.parse(raw);
+            }
+        }
+        catch (e) {
+            console.warn('Parse JSON Error when getItem from localStorage: ' + key, raw, e)
+            return null;
+        }
     },
     removeItem(key: string): void {
         wx.removeStorageSync(key)
@@ -23,11 +35,11 @@ const LocalStorage_Weapp: ILocalStorage = {
         return new Promise((rs, rj) => {
             wx.setStorage({
                 key: key,
-                data: value,
-                success: (res:any) => {
+                data: JSON.stringify(value),
+                success: (res: any) => {
                     rs(res);
                 },
-                fail: (error:any) => {
+                fail: (error: any) => {
                     rj(error);
                 }
             })
@@ -37,10 +49,21 @@ const LocalStorage_Weapp: ILocalStorage = {
         return new Promise((rs, rj) => {
             wx.getStorage({
                 key: key,
-                success: (res:any) => {
-                    rs(res);
+                success: (res: any) => {
+                    try {
+                        if (res == null) {
+                            rs(null);
+                        }
+                        else {
+                            rs(JSON.parse(res));
+                        }
+                    }
+                    catch (e) {
+                        console.warn('Parse JSON Error when getItemAsync from localStorage: ' + key, res, e)
+                        rs(null)
+                    }
                 },
-                fail: (error:any) => {
+                fail: (error: any) => {
                     rj(error);
                 }
             })
@@ -50,10 +73,10 @@ const LocalStorage_Weapp: ILocalStorage = {
         return new Promise((rs, rj) => {
             wx.removeStorage({
                 key: key,
-                success: (res:any) => {
+                success: (res: any) => {
                     rs(res);
                 },
-                fail: (error:any) => {
+                fail: (error: any) => {
                     rj(error);
                 }
             })
