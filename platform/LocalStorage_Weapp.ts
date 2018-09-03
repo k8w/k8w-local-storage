@@ -11,7 +11,7 @@ const LocalStorage_Weapp: ILocalStorage = {
     getItem<T=any>(key: string): T | null {
         let raw = wx.getStorageSync(key);
         try {
-            if (raw == null) {
+            if (raw == null || raw == '') {
                 return null;
             }
             else {
@@ -51,7 +51,7 @@ const LocalStorage_Weapp: ILocalStorage = {
                 key: key,
                 success: (res: any) => {
                     try {
-                        if (res == null) {
+                        if (res == null || res == '') {
                             rs(null);
                         }
                         else {
