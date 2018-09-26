@@ -55,7 +55,7 @@ const LocalStorage_Weapp: ILocalStorage = {
                             rs(null);
                         }
                         else {
-                            rs(JSON.parse(res));
+                            rs(JSON.parse(res.data));
                         }
                     }
                     catch (e) {
