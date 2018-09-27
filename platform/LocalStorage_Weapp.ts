@@ -64,7 +64,10 @@ const LocalStorage_Weapp: ILocalStorage = {
                     }
                 },
                 fail: (error: any) => {
-                    rj(error);
+                    if (error.errMsg !== 'getStorage:fail data not found') {
+                        console.error('LocalStorage.getItem ERROR:', error)
+                    }
+                    rs(null);
                 }
             })
         })
