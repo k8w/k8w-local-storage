@@ -5,10 +5,10 @@ import ILocalStorage from "../ILocalStorage";
  */
 const LocalStorage_Browser: ILocalStorage = {
     // 同步
-    setItem(key: string, value: any): void {
+    setItem(key: string, value: unknown): void {
         localStorage.setItem(key, JSON.stringify(value));
     },
-    getItem<T=any>(key: string): T | null {
+    getItem<T=unknown>(key: string): T | null {
         try {
             let raw = localStorage.getItem(key);
             if (raw == null) {
@@ -18,7 +18,7 @@ const LocalStorage_Browser: ILocalStorage = {
                 return JSON.parse(raw);
             }
         }
-        catch(e){
+        catch (e) {
             console.warn('Parse JSON Error when getItem from localStorage: ' + key, localStorage.getItem(key), e)
             return null;
         }
@@ -31,7 +31,7 @@ const LocalStorage_Browser: ILocalStorage = {
     },
 
     // 异步
-    setItemAsync(key: string, value: any) {
+    setItemAsync(key: string, value: unknown) {
         return new Promise((rs, rj) => {
             try {
                 LocalStorage_Browser.setItem(key, value);
@@ -42,7 +42,7 @@ const LocalStorage_Browser: ILocalStorage = {
             }
         })
     },
-    getItemAsync<T=any>(key: string): Promise<T | null> {
+    getItemAsync<T=unknown>(key: string): Promise<T | null> {
         return new Promise((rs, rj) => {
             try {
                 rs(LocalStorage_Browser.getItem(key));

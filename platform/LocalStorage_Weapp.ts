@@ -5,10 +5,10 @@ import ILocalStorage from "../ILocalStorage";
  */
 const LocalStorage_Weapp: ILocalStorage = {
     // 同步
-    setItem(key: string, value: any): void {
+    setItem(key: string, value: unknown): void {
         return wx.setStorageSync(key, JSON.stringify(value))
     },
-    getItem<T=any>(key: string): T | null {
+    getItem<T=unknown>(key: string): T | null {
         let raw = wx.getStorageSync(key);
         try {
             if (raw == null || raw == '') {
@@ -31,27 +31,27 @@ const LocalStorage_Weapp: ILocalStorage = {
     },
 
     // 异步
-    setItemAsync(key: string, value: any): Promise<void> {
+    setItemAsync(key: string, value: unknown): Promise<void> {
         return new Promise((rs, rj) => {
             wx.setStorage({
                 key: key,
                 data: JSON.stringify(value),
-                success: (res: any) => {
-                    rs(res);
+                success: () => {
+                    rs();
                 },
-                fail: (error: any) => {
+                fail: (error: unknown) => {
                     rj(error);
                 }
             })
         })
     },
-    getItemAsync<T=any>(key: string): Promise<T | null> {
+    getItemAsync<T=unknown>(key: string): Promise<T | null> {
         return new Promise((rs, rj) => {
             wx.getStorage({
                 key: key,
-                success: (res: any) => {
+                success: (res: { data: string }) => {
                     try {
-                        if (res == null || res == '') {
+                        if (res.data == null || res.data == '') {
                             rs(null);
                         }
                         else {
@@ -76,10 +76,10 @@ const LocalStorage_Weapp: ILocalStorage = {
         return new Promise((rs, rj) => {
             wx.removeStorage({
                 key: key,
-                success: (res: any) => {
-                    rs(res);
+                success: () => {
+                    rs();
                 },
-                fail: (error: any) => {
+                fail: (error: unknown) => {
                     rj(error);
                 }
             })
