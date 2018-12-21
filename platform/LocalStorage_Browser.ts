@@ -31,7 +31,7 @@ const LocalStorage_Browser: ILocalStorage = {
     },
     getKeys(): string[]{
         return Object.keys(localStorage);
-    }
+    },
 
     // 异步
     setItemAsync(key: string, value: unknown) {
