@@ -29,6 +29,9 @@ const LocalStorage_Browser: ILocalStorage = {
     clear(): void {
         localStorage.clear();
     },
+    getKeys(): string[]{
+        return Object.keys(localStorage);
+    }
 
     // 异步
     setItemAsync(key: string, value: unknown) {

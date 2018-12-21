@@ -29,6 +29,9 @@ const LocalStorage_Weapp: ILocalStorage = {
     clear(): void {
         wx.clearStorageSync()
     },
+    getKeys(): string[]{
+        return wx.getStorageInfoSync().keys;
+    },
 
     // 异步
     setItemAsync(key: string, value: unknown): Promise<void> {

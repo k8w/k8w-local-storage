@@ -4,6 +4,7 @@ export default interface ILocalStorage {
     getItem<T=unknown>(key: string): T | null;
     removeItem(key: string): void;
     clear(): void;
+    getKeys(): string[];
 
     // 异步
     setItemAsync(key: string, value: unknown): Promise<void>;
