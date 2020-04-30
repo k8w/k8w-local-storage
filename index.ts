@@ -1,16 +1,38 @@
-import LocalStorage_Weapp from './platform/LocalStorage_Weapp';
-import ILocalStorage from './ILocalStorage';
-import LocalStorage_Browser from './platform/LocalStorage_Browser';
+import { LocalStorageMiniapp } from './platform/LocalStorageMiniApp';
+import { LocalStorageBrowser } from './platform/LocalStorageBrowser';
 
-/** 同时支持H5和微信的LocalStorage 暂时只实现了微信 */
-let LocalStorage: ILocalStorage;
-if (typeof wx == 'object' && wx.setStorage) {
-    LocalStorage = LocalStorage_Weapp;
+declare let wx: any;
+declare let qq: any;
+declare let tt: any;
+
+export abstract class LocalStorage {
+    keyPrefix: string = '';
+
+    private static _instance?: LocalStorage;
+    static get instance(): LocalStorage {
+        if (!this._instance) {
+            if (typeof wx == 'object' && wx.setStorage) {
+                this._instance = new LocalStorageMiniapp(wx);
+            }
+            else if (typeof qq == 'object' && qq.setStorage) {
+                this._instance = new LocalStorageMiniapp(qq);
+            }
+            else if (typeof tt == 'object' && tt.setStorage) {
+                this._instance = new LocalStorageMiniapp(tt);
+            }
+            else if ('localStorage' in window) {
+                this._instance = new LocalStorageBrowser();
+            }
+            else {
+                throw new Error('Can not find a implement for LocalStorage at current platfor.')
+            }
+        }
+        return this._instance;
+    }
+
+    abstract getItem<T = unknown>(key: string): T | undefined;
+    abstract setItem(key: string, value: any): void;
+    abstract removeItem(key: string): void;
+    abstract clear(): void;
+    abstract keys(): string[];
 }
-else if (typeof localStorage !== 'undefined') {
-    LocalStorage = LocalStorage_Browser;
-}
-else {
-    throw new Error('Can not find a implement for LocalStorage at current platfor.')
-}
-export default LocalStorage;
