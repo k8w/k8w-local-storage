@@ -1,6 +1,6 @@
-import { LocalStorage } from "../index";
+import { BaseLocalStorage } from "./BaseLocalStorage";
 
-export class LocalStorageMiniapp extends LocalStorage {
+export class LocalStorageMiniapp extends BaseLocalStorage {
 
     private _miniAppObj: any;
 

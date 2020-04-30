@@ -1,15 +1,16 @@
-import { LocalStorageMiniapp } from './platform/LocalStorageMiniApp';
 import { LocalStorageBrowser } from './platform/LocalStorageBrowser';
+import { LocalStorageMiniapp } from './platform/LocalStorageMiniApp';
+import { BaseLocalStorage } from './platform/BaseLocalStorage';
 
 declare let wx: any;
 declare let qq: any;
 declare let tt: any;
 
-export abstract class LocalStorage {
-    keyPrefix: string = '';
+export class LocalStorage {
+    keyPrefix = '';
 
-    private static _instance?: LocalStorage;
-    static get instance(): LocalStorage {
+    private static _instance?: BaseLocalStorage;
+    static get instance(): BaseLocalStorage {
         if (!this._instance) {
             if (typeof wx == 'object' && wx.setStorage) {
                 this._instance = new LocalStorageMiniapp(wx);
@@ -29,10 +30,4 @@ export abstract class LocalStorage {
         }
         return this._instance;
     }
-
-    abstract getItem<T = unknown>(key: string): T | undefined;
-    abstract setItem(key: string, value: any): void;
-    abstract removeItem(key: string): void;
-    abstract clear(): void;
-    abstract keys(): string[];
 }

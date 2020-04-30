@@ -1,6 +1,6 @@
-import { LocalStorage } from '../index';
+import { BaseLocalStorage } from "./BaseLocalStorage";
 
-export class LocalStorageBrowser extends LocalStorage {
+export class LocalStorageBrowser extends BaseLocalStorage {
 
     setItem(key: string, value: unknown) {
         localStorage.setItem(this.keyPrefix + key, JSON.stringify(value));
