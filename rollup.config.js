@@ -1,21 +1,20 @@
 import typescript from 'rollup-plugin-typescript2';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from "rollup-plugin-terser";
 
 export default {
     input: './index.ts',
-    output: {
-        format: 'cjs',
-        file: './dist/index.js'
-    },
+    output: [
+        {
+            format: 'cjs',
+            file: './dist/index.js'
+        },
+        {
+            format: 'es',
+            file: './dist/index.mjs'
+        }
+    ],
     plugins: [
-        typescript({
-            tsconfigOverride: {
-                compilerOptions: {
-                    declaration: true,
-                    module: 'esnext'
-                }
-            }
-        }),
-        uglify()
+        typescript(),
+        terser()
     ]
 }

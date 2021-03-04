@@ -31,6 +31,6 @@ export class LocalStorageBrowser extends BaseLocalStorage {
     }
 
     keys(): string[] {
-        return Object.keys(localStorage).filter(v => v.startsWith(this.keyPrefix)).map(v => v.substr(this.keyPrefix.length));
+        return Object.keys(localStorage).filter(v => v.indexOf(this.keyPrefix) === 0).map(v => v.substr(this.keyPrefix.length));
     }
 }

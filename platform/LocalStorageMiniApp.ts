@@ -39,6 +39,6 @@ export class LocalStorageMiniapp extends BaseLocalStorage {
     };
 
     keys() {
-        return (this._miniAppObj.getStorageInfoSync().keys as string[]).filter(v => v.startsWith(this.keyPrefix)).map(v => v.substr(this.keyPrefix.length))
+        return (this._miniAppObj.getStorageInfoSync().keys as string[]).filter(v => v.indexOf(this.keyPrefix) === 0).map(v => v.substr(this.keyPrefix.length))
     };
 }
