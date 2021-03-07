@@ -1,12 +1,14 @@
 {
   "name": "k8w-local-storage",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "同时兼容浏览器和微信小程序的LocalStorage",
-  "main": "./index.js",
-  "exports": "./index.mjs",
+  "main": "index.cjs",
+  "exports": {
+    "require": "./index.cjs",
+    "import": "./index.mjs"
+  },
   "scripts": {
-    "build": "rm -rf dist && npx rollup -c && cp package.json LICENSE README.md dist/",
-    "copyDts": "find src -name *.d.ts | xargs cp --target-directory dist/src/"
+    "build": "rm -rf dist && npx rollup -c && cp package.json LICENSE README.md dist/"
   },
   "repository": {
     "type": "git",
@@ -24,10 +26,8 @@
   },
   "homepage": "https://github.com/k8w/k8w-local-storage#readme",
   "typings": "index.d.ts",
-  "dependencies": {},
   "devDependencies": {
     "rollup": "^2.7.5",
-    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.27.0",
     "typescript": "^3.8.3"
   }

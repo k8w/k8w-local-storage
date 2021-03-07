@@ -1,12 +1,11 @@
 import typescript from 'rollup-plugin-typescript2';
-import { terser } from "rollup-plugin-terser";
 
 export default {
     input: './index.ts',
     output: [
         {
             format: 'cjs',
-            file: './dist/index.js'
+            file: './dist/index.cjs'
         },
         {
             format: 'es',
@@ -15,6 +14,5 @@ export default {
     ],
     plugins: [
         typescript(),
-        terser()
     ]
 }
